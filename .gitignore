@@ -1,0 +1,13 @@
+# NetBeans
+/build/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Archivos temporales
+*.class
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
