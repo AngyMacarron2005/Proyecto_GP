@@ -4,28 +4,34 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaClaveAcceso.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaCliente.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaCompra.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaFacturacion.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/main.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/FacturaCabecera.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/TipoImpuesto.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/FormaPagoSRI.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/CompraCabecera.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/database/sistema_gp_ap.sql</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaConexion.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/service/ValidadorIdentificacionService.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/Cliente.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/FormaPagoDAO.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/CompraDetalle.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/FacturaDetalle.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/ProveedorDAO.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaCliente.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/main.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/TipoDocumentoIdentidad.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/ClienteDAO.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaProducto.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaConexion.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/ProductoDAO.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/Proveedor.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/FacturaDAO.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/service/SriClaveAccesoService.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaModulo3.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/Cliente.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/FormaPagoDAO.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/PruebaValidador.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/Producto.java</file>
             <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/config/Conexion.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/model/FacturaDetalle.java</file>
-            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/ProveedorDAO.java</file>
+            <file>file:/D:/Angy/Proyectos_GP/Proyecto_GP/src/proyecto_gp/backend/dao/CompraDAO.java</file>
         </group>
     </open-files>
 </project-private>

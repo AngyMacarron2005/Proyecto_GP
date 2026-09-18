@@ -1,53 +1,90 @@
-
 package proyecto_gp.backend.model;
 
 import java.math.BigDecimal;
 
 public class Producto {
+
     private int id;
     private String codigoPrincipal;
     private String nombre;
-    private BigDecimal precioVenta;
+    private BigDecimal precioUnitario;
     private BigDecimal stockActual;
-    private int tipoImpuestoId;
+    private BigDecimal stockMinimo;
+    private int tarifaIvaId;
 
-    // Campos auxiliares para vistas y cálculos
-    private String descripcionImpuesto;
-    private BigDecimal porcentajeIva;
+    public Producto() {
+    }
 
-    public Producto() {}
-
-    public Producto(int id, String codigoPrincipal, String nombre, BigDecimal precioVenta, BigDecimal stockActual, int tipoImpuestoId) {
+    public Producto(int id, String codigoPrincipal, String nombre, BigDecimal precioUnitario, 
+                    BigDecimal stockActual, BigDecimal stockMinimo, int tarifaIvaId) {
         this.id = id;
         this.codigoPrincipal = codigoPrincipal;
         this.nombre = nombre;
-        this.precioVenta = precioVenta;
+        this.precioUnitario = precioUnitario;
         this.stockActual = stockActual;
-        this.tipoImpuestoId = tipoImpuestoId;
+        this.stockMinimo = stockMinimo;
+        this.tarifaIvaId = tarifaIvaId;
     }
 
-    // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    // --- GETTERS Y SETTERS ---
 
-    public String getCodigoPrincipal() { return codigoPrincipal; }
-    public void setCodigoPrincipal(String codigoPrincipal) { this.codigoPrincipal = codigoPrincipal; }
+    public int getId() {
+        return id;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public BigDecimal getPrecioVenta() { return precioVenta; }
-    public void setPrecioVenta(BigDecimal precioVenta) { this.precioVenta = precioVenta; }
+    public String getCodigoPrincipal() {
+        return codigoPrincipal;
+    }
 
-    public BigDecimal getStockActual() { return stockActual; }
-    public void setStockActual(BigDecimal stockActual) { this.stockActual = stockActual; }
+    public void setCodigoPrincipal(String codigoPrincipal) {
+        this.codigoPrincipal = codigoPrincipal;
+    }
 
-    public int getTipoImpuestoId() { return tipoImpuestoId; }
-    public void setTipoImpuestoId(int tipoImpuestoId) { this.tipoImpuestoId = tipoImpuestoId; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getDescripcionImpuesto() { return descripcionImpuesto; }
-    public void setDescripcionImpuesto(String descripcionImpuesto) { this.descripcionImpuesto = descripcionImpuesto; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public BigDecimal getPorcentajeIva() { return porcentajeIva; }
-    public void setPorcentajeIva(BigDecimal porcentajeIva) { this.porcentajeIva = porcentajeIva; }
+    public BigDecimal getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public BigDecimal getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(BigDecimal stockActual) {
+        this.stockActual = stockActual;
+    }
+
+    public BigDecimal getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(BigDecimal stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public int getTarifaIvaId() {
+        return tarifaIvaId;
+    }
+
+    public void setTarifaIvaId(int tarifaIvaId) {
+        this.tarifaIvaId = tarifaIvaId;
+    }
+
+    public BigDecimal getPrecioVenta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

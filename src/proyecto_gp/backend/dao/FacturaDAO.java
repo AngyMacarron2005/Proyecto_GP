@@ -4,6 +4,7 @@ package proyecto_gp.backend.dao;
 import proyecto_gp.backend.config.Conexion;
 import proyecto_gp.backend.model.FacturaCabecera;
 import proyecto_gp.backend.model.FacturaDetalle;
+import proyecto_gp.backend.config.Conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
