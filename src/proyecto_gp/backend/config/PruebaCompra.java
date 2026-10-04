@@ -1,4 +1,3 @@
-
 package proyecto_gp.backend.config;
 
 import proyecto_gp.backend.dao.CompraDAO;
@@ -15,10 +14,14 @@ public class PruebaCompra {
         CompraDAO compraDAO = new CompraDAO();
         ProductoDAO productoDAO = new ProductoDAO();
 
-        // 1. Verificar stock actual del producto (Laptop HP - ID PROD-001)
-        Producto prod = productoDAO.buscarPorCodigo("PROD-001");
+        // 1. Buscar producto existente (PROD-TEST01 o PROD-001)
+        Producto prod = productoDAO.buscarPorCodigo("PROD-TEST01");
         if (prod == null) {
-            System.out.println("Crea un producto 'PROD-001' primero.");
+            prod = productoDAO.buscarPorCodigo("PROD-001");
+        }
+
+        if (prod == null) {
+            System.out.println("Debes ejecutar primero la prueba de Producto para registrar un producto inicial.");
             return;
         }
 
@@ -26,20 +29,24 @@ public class PruebaCompra {
 
         // 2. Preparar cabecera de compra a Proveedor ID 1
         CompraCabecera compra = new CompraCabecera();
-        compra.setProveedorId(1); // CORPORACION ELJURI S.A.
+        compra.setProveedorId(1); // Proveedor ID 1
         compra.setNumeroComprobante("001-002-000045123");
         compra.setFechaEmision(LocalDateTime.now());
 
-        // 3. Crear detalle: Comprar 5 Laptops a costo de $600 c/u con IVA 15%
+        // 3. Crear detalle: Comprar 5 unidades a costo de $600 c/u con IVA 15%
         BigDecimal cantidad = new BigDecimal("5.00");
         BigDecimal costoUnitario = new BigDecimal("600.00");
         BigDecimal subtotal = costoUnitario.multiply(cantidad); // $3000.00
         BigDecimal valorIva = subtotal.multiply(new BigDecimal("0.15")); // $450.00
         BigDecimal totalCompra = subtotal.add(valorIva); // $3450.00
 
-        CompraDetalle detalle = new CompraDetalle(
-                prod.getId(), cantidad, costoUnitario, subtotal, valorIva
-        );
+        CompraDetalle detalle = new CompraDetalle();
+        detalle.setProductoId(prod.getId());
+        detalle.setCantidad(cantidad);
+        detalle.setPrecioCompraUnitario(costoUnitario);
+        detalle.setPrecioTotalSinImpuesto(subtotal);
+        detalle.setValorIva(valorIva);
+
         compra.agregarDetalle(detalle);
 
         compra.setSubtotalSinImpuestos(subtotal);
@@ -54,8 +61,10 @@ public class PruebaCompra {
             System.out.println("Total Pagado: $" + compra.getImporteTotal());
 
             // Verificar stock incrementado
-            Producto prodDespues = productoDAO.buscarPorCodigo("PROD-001");
-            System.out.println("Stock DESPUÉS de la compra: " + prodDespues.getStockActual());
+            Producto prodDespues = productoDAO.buscarPorCodigo(prod.getCodigoPrincipal());
+            if (prodDespues != null) {
+                System.out.println("Stock DESPUÉS de la compra: " + prodDespues.getStockActual());
+            }
         } else {
             System.err.println("Falló el registro de la compra.");
         }

@@ -13,18 +13,19 @@ import java.util.List;
 public class ProductoDAO {
 
     public boolean insertar(Producto producto) {
-        String sql = "INSERT INTO producto (codigo_principal, nombre, precio_unitario, stock_actual, stock_minimo, tarifa_iva_id) "
-                   + "VALUES (?, ?, ?, ?, ?, ?)";
-        
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO producto (codigo_principal, nombre, precio_venta, stock_actual, tipo_impuesto_id) "
+                   + "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null) {
+
+            if (conn == null) return false;
 
             stmt.setString(1, producto.getCodigoPrincipal());
             stmt.setString(2, producto.getNombre());
             stmt.setBigDecimal(3, producto.getPrecioUnitario());
             stmt.setBigDecimal(4, producto.getStockActual());
-            stmt.setBigDecimal(5, producto.getStockMinimo());
-            stmt.setInt(6, producto.getTarifaIvaId());
+            stmt.setInt(5, producto.getTarifaIvaId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -33,19 +34,24 @@ public class ProductoDAO {
         }
     }
 
-    public boolean actualizar(Producto producto) {
-        String sql = "UPDATE producto SET codigo_principal = ?, nombre = ?, precio_unitario = ?, "
-                   + "stock_minimo = ?, tarifa_iva_id = ? WHERE id = ?";
+    public boolean registrar(Producto producto) {
+        return insertar(producto);
+    }
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public boolean actualizar(Producto producto) {
+        String sql = "UPDATE producto SET codigo_principal = ?, nombre = ?, precio_venta = ?, "
+                   + "tipo_impuesto_id = ? WHERE id = ?";
+
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null) {
+
+            if (conn == null) return false;
 
             stmt.setString(1, producto.getCodigoPrincipal());
             stmt.setString(2, producto.getNombre());
             stmt.setBigDecimal(3, producto.getPrecioUnitario());
-            stmt.setBigDecimal(4, producto.getStockMinimo());
-            stmt.setInt(5, producto.getTarifaIvaId());
-            stmt.setInt(6, producto.getId());
+            stmt.setInt(4, producto.getTarifaIvaId());
+            stmt.setInt(5, producto.getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -57,8 +63,10 @@ public class ProductoDAO {
     public boolean eliminar(int id) {
         String sql = "DELETE FROM producto WHERE id = ?";
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null) {
+
+            if (conn == null) return false;
 
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
@@ -69,12 +77,14 @@ public class ProductoDAO {
     }
 
     public List<Producto> listarTodos() {
-        List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT id, codigo_principal, nombre, precio_unitario, stock_actual, stock_minimo, tarifa_iva_id FROM producto";
+    List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT id, codigo_principal, nombre, precio_venta, stock_actual, tipo_impuesto_id FROM producto";
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null;
+             ResultSet rs = stmt != null ? stmt.executeQuery() : null) {
+
+            if (rs == null) return lista;
 
             while (rs.next()) {
                 lista.add(mapearProducto(rs));
@@ -85,13 +95,43 @@ public class ProductoDAO {
         return lista;
     }
 
+    public List<Producto> listar() {
+    return listarTodos();
+}
+    public Producto buscarPorCodigo(String codigo) {
+
+        String sql = "SELECT id, codigo_principal, nombre, precio_venta, "
+                   + "stock_actual, tipo_impuesto_id "
+                   + "FROM producto WHERE codigo_principal = ?";
+
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codigo);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return mapearProducto(rs);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al buscar producto por código: " + e.getMessage());
+        }
+
+        return null;
+    }
     public List<Producto> buscarPorCriterio(String criterio) {
         List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT id, codigo_principal, nombre, precio_unitario, stock_actual, stock_minimo, tarifa_iva_id "
+        String sql = "SELECT id, codigo_principal, nombre, precio_venta, stock_actual, tipo_impuesto_id "
                    + "FROM producto WHERE codigo_principal LIKE ? OR nombre LIKE ?";
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null) {
+
+            if (conn == null) return lista;
 
             String filtro = "%" + criterio + "%";
             stmt.setString(1, filtro);
@@ -108,14 +148,16 @@ public class ProductoDAO {
         return lista;
     }
 
-    public List<Producto> listarProductosBajoStock() {
-        List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT id, codigo_principal, nombre, precio_unitario, stock_actual, stock_minimo, tarifa_iva_id "
-                   + "FROM producto WHERE stock_actual <= stock_minimo";
+    public List listarProductosBajoStock() {
+        List lista = new ArrayList<>();
+        String sql = "SELECT id, codigo_principal, nombre, precio_venta, stock_actual, tipo_impuesto_id "
+                   + "FROM producto WHERE stock_actual <= 5";
 
-        try (Connection conn = Conexion.getConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = Conexion.conectar();
+             PreparedStatement stmt = conn != null ? conn.prepareStatement(sql) : null;
+             ResultSet rs = stmt != null ? stmt.executeQuery() : null) {
+
+            if (rs == null) return lista;
 
             while (rs.next()) {
                 lista.add(mapearProducto(rs));
@@ -131,14 +173,9 @@ public class ProductoDAO {
         p.setId(rs.getInt("id"));
         p.setCodigoPrincipal(rs.getString("codigo_principal"));
         p.setNombre(rs.getString("nombre"));
-        p.setPrecioUnitario(rs.getBigDecimal("precio_unitario"));
+        p.setPrecioUnitario(rs.getBigDecimal("precio_venta"));
         p.setStockActual(rs.getBigDecimal("stock_actual"));
-        p.setStockMinimo(rs.getBigDecimal("stock_minimo"));
-        p.setTarifaIvaId(rs.getInt("tarifa_iva_id"));
+        p.setTarifaIvaId(rs.getInt("tipo_impuesto_id"));
         return p;
-    }
-
-    public Producto buscarPorCodigo(String proD001) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

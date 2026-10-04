@@ -1,4 +1,3 @@
-
 package proyecto_gp.backend.config;
 
 import proyecto_gp.backend.dao.ClienteDAO;
@@ -9,9 +8,8 @@ public class PruebaCliente {
     public static void main(String[] args) {
         ClienteDAO dao = new ClienteDAO();
 
-        // 1. Probar registro de cliente
         Cliente nuevo = new Cliente();
-        nuevo.setTipoDocumentoId(2); // 2 = CÉDULA
+        nuevo.setTipoDocumentoId(2);
         nuevo.setNumeroIdentificacion("1712345678");
         nuevo.setNombres("Juan");
         nuevo.setApellidos("Pérez");
@@ -21,14 +19,15 @@ public class PruebaCliente {
 
         if (dao.registrar(nuevo)) {
             System.out.println("Cliente registrado exitosamente.");
+        } else {
+            System.out.println("No se pudo registrar el cliente.");
         }
 
-        // 2. Probar listar clientes
         List<Cliente> lista = dao.listar();
         System.out.println("\n--- LISTA DE CLIENTES ---");
         for (Cliente c : lista) {
             System.out.println(c.getId() + " - " + c.getNombres() + " " + c.getApellidos() + 
-                               " | Doc: " + c.getNumeroIdentificacion() + " (" + c.getNombreTipoDocumento() + ")");
+                               " | Doc: " + c.getNumeroIdentificacion());
         }
     }
 }

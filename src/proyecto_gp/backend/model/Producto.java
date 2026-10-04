@@ -9,7 +9,7 @@ public class Producto {
     private String nombre;
     private BigDecimal precioUnitario;
     private BigDecimal stockActual;
-    private BigDecimal stockMinimo;
+    private BigDecimal stockMinimo = BigDecimal.ZERO;
     private int tarifaIvaId;
 
     public Producto() {
@@ -26,65 +26,34 @@ public class Producto {
         this.tarifaIvaId = tarifaIvaId;
     }
 
-    // --- GETTERS Y SETTERS ---
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public int getId() {
-        return id;
-    }
+    public String getCodigoPrincipal() { return codigoPrincipal; }
+    public void setCodigoPrincipal(String codigoPrincipal) { this.codigoPrincipal = codigoPrincipal; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getCodigoPrincipal() {
-        return codigoPrincipal;
-    }
+    public BigDecimal getPrecioUnitario() { return precioUnitario; }
+    public void setPrecioUnitario(BigDecimal precioUnitario) { this.precioUnitario = precioUnitario; }
 
-    public void setCodigoPrincipal(String codigoPrincipal) {
-        this.codigoPrincipal = codigoPrincipal;
-    }
+    // Métodos alias para pruebas antiguas
+    public BigDecimal getPrecioVenta() { return precioUnitario; }
+    public void setPrecioVenta(BigDecimal precioVenta) { this.precioUnitario = precioVenta; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public BigDecimal getStockActual() { return stockActual; }
+    public void setStockActual(BigDecimal stockActual) { this.stockActual = stockActual; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public BigDecimal getStockMinimo() { return stockMinimo; }
+    public void setStockMinimo(BigDecimal stockMinimo) { this.stockMinimo = stockMinimo; }
 
-    public BigDecimal getPrecioUnitario() {
-        return precioUnitario;
-    }
+    public int getTarifaIvaId() { return tarifaIvaId; }
+    public void setTarifaIvaId(int tarifaIvaId) { this.tarifaIvaId = tarifaIvaId; }
 
-    public void setPrecioUnitario(BigDecimal precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
+    // Métodos alias para pruebas antiguas
+    public int getTipoImpuestoId() { return tarifaIvaId; }
+    public void setTipoImpuestoId(int tipoImpuestoId) { this.tarifaIvaId = tipoImpuestoId; }
 
-    public BigDecimal getStockActual() {
-        return stockActual;
-    }
-
-    public void setStockActual(BigDecimal stockActual) {
-        this.stockActual = stockActual;
-    }
-
-    public BigDecimal getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(BigDecimal stockMinimo) {
-        this.stockMinimo = stockMinimo;
-    }
-
-    public int getTarifaIvaId() {
-        return tarifaIvaId;
-    }
-
-    public void setTarifaIvaId(int tarifaIvaId) {
-        this.tarifaIvaId = tarifaIvaId;
-    }
-
-    public BigDecimal getPrecioVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public String getDescripcionImpuesto() { return "IVA Tarifa " + tarifaIvaId; }
 }
